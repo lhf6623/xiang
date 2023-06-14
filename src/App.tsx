@@ -7,15 +7,15 @@ function App() {
         aaaa
       </div>
       <div flex flex-1 h-292px shrink-0>
-        <div flex-1 shrink-0 data-tauri-drag-region box-1 w-230px>
+        <div flex-1 shrink-0 data-tauri-drag-region m-box-border w-230px>
           <PanelBox />
         </div>
-        <div mx-3px w-108px box-1 data-tauri-drag-region></div>
-        <div w-148px box-1></div>
+        <div mx-3px w-108px m-box-border data-tauri-drag-region></div>
+        <div w-148px m-box-border></div>
       </div>
-      <div mt-3px h-18px shadow flex-1 relative>
+      <div h-28px flex items-center shadow shrink-0 relative>
         <button button-box mr-2px>
-          开始
+          开局
         </button>
         <button button-box mr-2px>
           后退
@@ -26,7 +26,9 @@ function App() {
         <button button-box mr-2px>
           终局
         </button>
-        <span>0/29</span>
+        <span text-xs inline-block px-12px text-blue-900>
+          0/29
+        </span>
         <button button-box mr-2px>
           自动
         </button>
@@ -42,7 +44,7 @@ function App() {
         <button button-box mr-2px>
           研究
         </button>
-        <button button-box absolute right-0 text-red px-2>
+        <button button-box absolute right-0 text-red font-bold px-3>
           棋谱搜索
         </button>
       </div>

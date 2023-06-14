@@ -12,10 +12,10 @@ import presetRemToPx from "@unocss/preset-rem-to-px";
 export default defineConfig({
   shortcuts: {
     "flex-center": "flex justify-center items-center",
-    "box-1":
-      "border border-solid border-#666 shadow box-border h-full overflow-hidden",
+    "m-box-border":
+      "border border-solid border-#666 box-border h-full overflow-hidden",
     "button-box":
-      "shadow border border-solid leading text-xs border-#666 h-22px px-1 rounded-sm overflow-hidden",
+      "shadow-inner text-xs h-20px px-5.6px rounded-5px overflow-hidden bg-white",
   },
   presets: [
     /* 将所有实用程序的 rem 转换为 px。 */
