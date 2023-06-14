@@ -14,7 +14,8 @@ export default defineConfig({
     "flex-center": "flex justify-center items-center",
     "box-1":
       "border border-solid border-#666 shadow box-border h-full overflow-hidden",
-    "but-box": 'border border-solid'
+    "button-box":
+      "shadow border border-solid leading text-xs border-#666 h-22px px-1 rounded-sm overflow-hidden",
   },
   presets: [
     /* 将所有实用程序的 rem 转换为 px。 */

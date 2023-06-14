@@ -3,18 +3,48 @@ import PanelBox from "./components/PanelBox";
 function App() {
   return (
     <div px-4px flex flex-col h-full text-sm bg="#9CF" data-tauri-drag-region>
-      <div w-full text-center p-2>
-        兑子争先--王嘉良弃兵入杀
+      <div w-full text-center py-1>
+        aaaa
       </div>
-      <div flex flex-1 h-292px>
+      <div flex flex-1 h-292px shrink-0>
         <div flex-1 shrink-0 data-tauri-drag-region box-1 w-230px>
           <PanelBox />
         </div>
-        <div mx-3px w-108px box-1></div>
+        <div mx-3px w-108px box-1 data-tauri-drag-region></div>
         <div w-148px box-1></div>
       </div>
-      <div mt-6px h-18px shadow>
-        <button un-leading>开始</button>
+      <div mt-3px h-18px shadow flex-1 relative>
+        <button button-box mr-2px>
+          开始
+        </button>
+        <button button-box mr-2px>
+          后退
+        </button>
+        <button button-box mr-2px>
+          前进
+        </button>
+        <button button-box mr-2px>
+          终局
+        </button>
+        <span>0/29</span>
+        <button button-box mr-2px>
+          自动
+        </button>
+        <button button-box mr-2px>
+          旋转
+        </button>
+        <button button-box mr-2px>
+          对称
+        </button>
+        <button button-box mr-2px>
+          保存
+        </button>
+        <button button-box mr-2px>
+          研究
+        </button>
+        <button button-box absolute right-0 text-red px-2>
+          棋谱搜索
+        </button>
       </div>
     </div>
   );
