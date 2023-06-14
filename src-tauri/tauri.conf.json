@@ -1,0 +1,53 @@
+{
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "beforeBuildCommand": "pnpm build",
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist",
+    "withGlobalTauri": false
+  },
+  "package": {
+    "productName": "mask",
+    "version": "0.0.0"
+  },
+  "tauri": {
+    "macOSPrivateApi": true,
+    "allowlist": {
+      "all": true,
+      "http": {
+        "all": false,
+        "request": false,
+        "scope": ["http://**", "wss://**", "https://**", "ws://**"]
+      }
+    },
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.tauri.mask",
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ]
+    },
+    "security": {
+      "csp": null
+    },
+    "windows": [
+      {
+        "label": "main",
+        "center": true,
+        "resizable": true,
+        "title": "xiang",
+        "visible": false,
+        "width": 500,
+        "height": 350,
+        "transparent": true,
+        "hiddenTitle": true,
+        "decorations": false
+      }
+    ]
+  }
+}
