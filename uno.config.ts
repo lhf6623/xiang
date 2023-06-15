@@ -9,14 +9,10 @@ import {
 
 import presetRemToPx from "@unocss/preset-rem-to-px";
 
+import { shortcuts } from "./devConfig/uno";
+
 export default defineConfig({
-  shortcuts: {
-    "flex-center": "flex justify-center items-center",
-    "m-box-border":
-      "border border-solid border-#666 box-border h-full overflow-hidden",
-    "button-box":
-      "shadow-inner text-xs h-20px px-5.6px rounded-5px overflow-hidden bg-white",
-  },
+  shortcuts,
   presets: [
     /* 将所有实用程序的 rem 转换为 px。 */
     presetRemToPx(),
@@ -30,7 +26,6 @@ export default defineConfig({
         display: "inline-block",
         "vertical-align": "middle",
       },
-      prefix: "i-",
     }),
   ],
 

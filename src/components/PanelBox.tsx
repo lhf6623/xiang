@@ -1,7 +1,10 @@
 export default () => {
+  // w-230 h-290
   return (
-    <div bg="#eed3b3" h-290px w-230px>
-      aaa
+    <div flex-1 shrink-0 m-box-border w-230px>
+      <div bg="#eed3b3" h-full w-full>
+        aaa
+      </div>
     </div>
   );
 };
