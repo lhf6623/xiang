@@ -6,7 +6,7 @@ export default () => {
         <span hover:underline>添加着法</span>
         <span hover:underline>修改注解</span>
       </div>
-      <div flex-1 bg-white overflow-y-auto>
+      <div flex-1 bg-white hover:overflow-y-auto overflow-hidden>
         <p>111</p>
         <p>111</p>
         <p>111</p>
@@ -32,7 +32,7 @@ export default () => {
           <span hover:underline>删</span>
         </span>
       </div>
-      <div h-66px bg-white overflow-y-auto>
+      <div h-66px bg-white hover:overflow-y-auto overflow-hidden>
         <p>111</p>
         <p>111</p>
         <p>111</p>
