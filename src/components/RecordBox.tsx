@@ -11,14 +11,14 @@ export default () => {
   }
 
   return (
-    <div mx-3px w-108px m-border flex flex-col>
+    <div mx-2px w-108px m-border flex flex-col>
       <div bg="#9DF" text-12px m-flex-between px-1>
         <span>棋谱序列</span>
         <span onclick={handelShowList}>
-          [<span hover:underline>{showList() ? "隐藏" : "显示"}</span>]
+          [<span m-hover-text>{showList() ? "隐藏" : "显示"}</span>]
         </span>
       </div>
-      <div flex-1 m-scroll bg-white p-1px>
+      <div flex-1 m-scroll-y bg-white p-1px>
         <p m-active>====111====</p>
         {list().map((item) => (
           <p>{item}</p>

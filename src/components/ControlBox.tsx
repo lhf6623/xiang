@@ -1,6 +1,6 @@
 export default () => {
   return (
-    <div h-30px flex items-center shadow shrink-0 relative>
+    <div h-30px flex items-center relative shrink-0 data-tauri-drag-region>
       <button m-button mr-2px>
         开局
       </button>
