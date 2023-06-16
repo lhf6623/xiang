@@ -11,19 +11,13 @@
     "version": "0.0.0"
   },
   "tauri": {
-    "macOSPrivateApi": true,
     "allowlist": {
-      "all": true,
-      "http": {
-        "all": false,
-        "request": false,
-        "scope": ["http://**", "wss://**", "https://**", "ws://**"]
-      }
+      "all": true
     },
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "com.tauri.mask",
+      "identifier": "com.tauri.xiang",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
@@ -39,14 +33,13 @@
       {
         "label": "main",
         "center": true,
-        "resizable": true,
+        "resizable": false,
         "title": "xiang",
-        "visible": false,
         "width": 500,
         "height": 350,
-        "transparent": true,
         "hiddenTitle": true,
-        "decorations": false
+        "decorations": false,
+        "acceptFirstMouse": true
       }
     ]
   }
