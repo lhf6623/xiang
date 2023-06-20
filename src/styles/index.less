@@ -81,9 +81,10 @@ body,
   height: calc(100% - 12px);
   left: 6px;
   width: calc(100% - 12px);
+  z-index: 10;
 }
 
-.gz {
+.lattice {
   position: relative;
 
   &::after,
@@ -95,7 +96,7 @@ body,
     top: 0px;
     left: 0px;
     background: #666;
-    z-index: 100;
+    z-index: 10;
   }
 
   &::after {

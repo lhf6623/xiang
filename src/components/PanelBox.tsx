@@ -12,7 +12,7 @@ export default () => {
       </div>
       <div w-225px flex-1 flex flex-wrap relative class="m-after-panel">
         {content_arr.map((item) => (
-          <span w-25px h-25px text-center leading-25px class={item.cla}></span>
+          <p w-25px h-25px text-center leading-25px class={item.cla}></p>
         ))}
       </div>
       <div w-225px>
