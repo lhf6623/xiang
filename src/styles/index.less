@@ -81,7 +81,7 @@ body,
   height: calc(100% - 12px);
   left: 6px;
   width: calc(100% - 12px);
-  z-index: 10;
+  z-index: 5;
 }
 
 .lattice {
@@ -135,3 +135,75 @@ body,
     height: 50%;
   }
 }
+
+.lattice_box() {
+  position: absolute;
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  z-index: 20;
+  top: calc(50% - 0.5px);
+  left: calc(50% - 0.5px);
+}
+
+// 斜线 \ /
+.line_top_left,
+.line_top_right,
+.line_bottom_left,
+.line_bottom_right {
+  & > span {
+    .lattice_box();
+    &::after {
+      position: absolute;
+      content: "";
+      width: 1px;
+      height: 35.36px;
+      background: #666;
+      z-index: 21;
+      top: -5.2px;
+      left: 12px;
+    }
+  }
+}
+
+@line_set: {
+  line_top_left: -45deg;
+  line_top_right: 45deg;
+  line_bottom_left: 45deg;
+  line_bottom_right: -45deg;
+};
+
+each(@line_set, {
+  .@{key} {
+    & > span {
+      &::after {
+        transform: rotate(@value);
+      }
+    }
+  }
+});
+
+// 位置
+@loc_set: {
+  loc_top_right: top, right;
+  loc_top_left: top, left;
+  loc_bottom_right: top, right;
+  loc_bottom_left: top, left;
+};
+each(@loc_set, {
+  .@{key} {
+    & > span {
+      .lattice_box();
+      &::before {
+        content: "";
+        position: absolute;
+        right: 2px;
+        top: 2px;
+        height: 5px;
+        width: 5px;
+        border-top: 1px solid #666;
+        border-right: 1px solid #666;
+      }
+    }
+  }
+});

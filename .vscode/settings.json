@@ -1,3 +1,8 @@
 {
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "vue.autoInsert.dotValue": true,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "diffEditor.codeLens": false,
+  "editor.minimap.autohide": false,
+  "files.insertFinalNewline": true
 }
