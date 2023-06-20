@@ -185,25 +185,45 @@ each(@line_set, {
 
 // 位置
 @loc_set: {
-  loc_top_right: top, right;
-  loc_top_left: top, left;
-  loc_bottom_right: top, right;
-  loc_bottom_left: top, left;
+  top: right;
+  top: left;
+  bottom: right;
+  bottom: left;
 };
-each(@loc_set, {
-  .@{key} {
+
+.loc(@p1, @p2) {
+  content: "";
+  position: absolute;
+  @{p1}: 2px;
+  @{p2}: 2px;
+  height: 5px;
+  width: 5px;
+  border-@{p1}: 1px solid #666;
+  border-@{p2}: 1px solid #666;
+}
+
+.getFakeTop(@key, @value) when(@key = top) {
+  .loc_@{key}_@{value} {
     & > span {
       .lattice_box();
       &::before {
-        content: "";
-        position: absolute;
-        right: 2px;
-        top: 2px;
-        height: 5px;
-        width: 5px;
-        border-top: 1px solid #666;
-        border-right: 1px solid #666;
+        .loc(@key, @value);
       }
     }
   }
+}
+.getFakeBottom(@key, @value) when(@key = bottom) {
+  .loc_@{key}_@{value} {
+    & > span {
+      .lattice_box();
+      &::after {
+        .loc(@key, @value);
+      }
+    }
+  }
+}
+
+each(@loc_set, {
+  .getFakeTop(@key, @value);
+  .getFakeBottom(@key, @value);
 });
