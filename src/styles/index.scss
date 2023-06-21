@@ -136,7 +136,7 @@ body,
   }
 }
 
-.lattice_box() {
+@mixin lattice_box {
   position: absolute;
   display: inline-block;
   height: 100%;
@@ -152,7 +152,7 @@ body,
 .line_bottom_left,
 .line_bottom_right {
   & > span {
-    .lattice_box();
+    @include lattice_box;
     &::after {
       position: absolute;
       content: "";
@@ -166,64 +166,42 @@ body,
   }
 }
 
-@line_set: {
-  line_top_left: -45deg;
-  line_top_right: 45deg;
-  line_bottom_left: 45deg;
-  line_bottom_right: -45deg;
-};
-
-each(@line_set, {
-  .@{key} {
+@each $cla,
+  $deg
+    in (
+      line_top_left: -45deg,
+      line_top_right: 45deg,
+      line_bottom_left: 45deg,
+      line_bottom_right: -45deg
+    )
+{
+  .#{$cla} {
     & > span {
       &::after {
-        transform: rotate(@value);
+        transform: rotate($deg);
       }
     }
   }
-});
+}
 
 // 位置
-@loc_set: {
-  top: right;
-  top: left;
-  bottom: right;
-  bottom: left;
-};
-
-.loc(@p1, @p2) {
-  content: "";
-  position: absolute;
-  @{p1}: 2px;
-  @{p2}: 2px;
-  height: 5px;
-  width: 5px;
-  border-@{p1}: 1px solid #666;
-  border-@{p2}: 1px solid #666;
-}
-
-.getFakeTop(@key, @value) when(@key = top) {
-  .loc_@{key}_@{value} {
+@each $key, $value, $cla in (top, right, after), (top, left, after),
+  (bottom, right, before), (bottom, left, before)
+{
+  .loc_#{$key}_#{$value} {
     & > span {
-      .lattice_box();
-      &::before {
-        .loc(@key, @value);
+      @include lattice_box;
+      // $cla 为什么会有这个参数：一个格子里面有两个位置线条
+      &::#{$cla} {
+        content: "";
+        position: absolute;
+        #{$key}: 2px;
+        #{$value}: 2px;
+        height: 5px;
+        width: 5px;
+        border-#{$key}: 1px solid #666;
+        border-#{$value}: 1px solid #666;
       }
     }
   }
 }
-.getFakeBottom(@key, @value) when(@key = bottom) {
-  .loc_@{key}_@{value} {
-    & > span {
-      .lattice_box();
-      &::after {
-        .loc(@key, @value);
-      }
-    }
-  }
-}
-
-each(@loc_set, {
-  .getFakeTop(@key, @value);
-  .getFakeBottom(@key, @value);
-});
