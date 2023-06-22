@@ -151,7 +151,7 @@ body,
 .line_top_right,
 .line_bottom_left,
 .line_bottom_right {
-  & > span {
+  & > .loc {
     @include lattice_box;
     &::after {
       position: absolute;
@@ -176,7 +176,7 @@ body,
     )
 {
   .#{$cla} {
-    & > span {
+    & > .loc {
       &::after {
         transform: rotate($deg);
       }
@@ -189,7 +189,7 @@ body,
   (bottom, right, before), (bottom, left, before)
 {
   .loc_#{$key}_#{$value} {
-    & > span {
+    & > .loc {
       @include lattice_box;
       // $cla 为什么会有这个参数：一个格子里面有两个位置线条
       &::#{$cla} {
@@ -203,5 +203,32 @@ body,
         border-#{$value}: 1px solid #666;
       }
     }
+  }
+}
+
+.piece {
+  position: absolute;
+  width: 86%;
+  height: 86%;
+  z-index: 50;
+  line-height: calc(25px * 0.86);
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  color: #fff;
+}
+
+.isBlack {
+  background: black;
+  &::after {
+    content: attr(data-name);
+  }
+}
+
+.isRed {
+  background-color: red;
+  &::after {
+    content: attr(data-name);
   }
 }
