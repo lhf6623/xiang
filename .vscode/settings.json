@@ -1,5 +1,5 @@
 {
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "vue.autoInsert.dotValue": true,
   "editor.cursorSmoothCaretAnimation": "on",
   "diffEditor.codeLens": false,
