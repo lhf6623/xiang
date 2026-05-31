@@ -1,25 +1,5 @@
-import { defineComponent, computed, watch, useTemplateRef } from 'vue';
-import { NButton, NScrollbar, NButtonGroup } from 'naive-ui';
-import type { ScrollbarInst } from 'naive-ui';
-import { useAppStore } from '@/store';
-import { type MaybeElement, useElementSize } from '@vueuse/core';
-
-export function Rivers() {
-  const list = ['楚', '河', '汉', '界'];
-  return (
-    <>
-      <div class='absolute w-full flex justify-evenly h-36px z-10 top-50% mt--18px'>
-        {list.map((text, index) => {
-          return (
-            <span key={index} class='inline-block h-36px leading-36px'>
-              {text}
-            </span>
-          );
-        })}
-      </div>
-    </>
-  );
-}
+import { defineComponent, computed } from 'vue';
+import { useAppStore } from '@/stores/app';
 
 export function NumberList({ list = [] }: { list: (string | number)[] }) {
   return (
@@ -49,42 +29,30 @@ export const Control = defineComponent({
       return store.record_index < 0;
     });
 
-    function deduction() {
-      store.is_run = !store.is_run;
-      store.active = [];
-    }
-
     return () => (
-      <footer class='relative flex-between h-22px text-12px w-full'>
-        <NButton
-          size='tiny'
-          type='info'
-          class='shadow'
+      <footer class='flex flex-row items-center justify-between h-26px w-full px-4px'>
+        <button
+          class='h-20px px-6px text-11px flex items-center bg-#d9d9d9 b-1 b-solid b-#999 rounded-2px cursor-pointer hover-bg-#fff active-bg-#ccc disabled-opacity-40 disabled-cursor-not-allowed'
           onClick={store.refreshGame}
         >
           重新开始
-        </NButton>
-        {/* <NButton size='tiny' type='info' class='shadow' onClick={deduction}>
-          {!store.is_run ? '继续' : '推演'}
-        </NButton> */}
-        <NButtonGroup size='tiny'>
-          <NButton
+        </button>
+        <div class='flex flex-row gap-2px'>
+          <button
+            class='h-20px px-6px text-11px flex items-center bg-#d9d9d9 b-1 b-solid b-#999 rounded-2px cursor-pointer hover-bg-#fff active-bg-#ccc disabled-opacity-40 disabled-cursor-not-allowed'
             disabled={isFirst.value}
-            type='info'
-            round
             onClick={() => nextRecord(-1)}
           >
             上一步
-          </NButton>
-          <NButton
+          </button>
+          <button
+            class='h-20px px-6px text-11px flex items-center bg-#d9d9d9 b-1 b-solid b-#999 rounded-2px cursor-pointer hover-bg-#fff active-bg-#ccc disabled-opacity-40 disabled-cursor-not-allowed'
             disabled={isLast.value}
-            type='info'
-            round
             onClick={() => nextRecord(1)}
           >
             下一步
-          </NButton>
-        </NButtonGroup>
+          </button>
+        </div>
       </footer>
     );
   },

@@ -9,17 +9,15 @@
       </section>
       <div class="flex-col gap-4px flex h-full">
         <RecordList />
-        <MoveInput />
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
   import { onMounted } from 'vue';
-  import Maps from '@/XiangqiMap.vue';
-  import { Control } from './common';
-  import MoveInput from './MoveInput.vue';
-  import RecordList from './RecordList.vue';
+  import Maps from '@/components/ChessMap.vue';
+  import { Control } from '@/components/BoardParts';
+  import RecordList from '@/components/RecordList.vue';
 
   onMounted(() => {
     // 禁止右键

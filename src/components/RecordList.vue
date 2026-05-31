@@ -6,7 +6,7 @@
       棋谱序列
       <span v-if="!store.is_run" class="scale-75 inline-block">[历史]</span>
     </header>
-    <NScrollbar ref="scrollbarRef" class="flex-1 h-full">
+    <div ref="scrollRef" class="flex-1 h-full overflow-y-auto">
       <ul ref="recordRef" class="text-center">
         <li
           :class="`b-b ${isStart ? 'text-white bg-#0062ff99' : ''}`"
@@ -33,21 +33,18 @@
           </span>
         </li>
       </ul>
-    </NScrollbar>
-    <Clock />
+    </div>
+
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { useElementSize, type MaybeElement } from '@vueuse/core';
-  import type { ScrollbarInst } from 'naive-ui';
+  import { useElementSize } from '@/composables/useElementSize';
   import { computed, useTemplateRef, watch } from 'vue';
-  import { useAppStore } from './store';
-  import { NScrollbar } from 'naive-ui';
-  import Clock from './Clock.vue';
+  import { useAppStore } from '@/stores/app';
 
-  const recordListRef = useTemplateRef<MaybeElement>('recordRef');
-  const scrollbarRef = useTemplateRef<ScrollbarInst | null>('scrollbarRef');
+  const recordListRef = useTemplateRef<HTMLElement | null>('recordRef');
+  const scrollRef = useTemplateRef<HTMLElement | null>('scrollRef');
 
   const store = useAppStore();
 
@@ -55,7 +52,7 @@
   watch(
     () => height,
     () => {
-      scrollbarRef.value?.scrollBy({
+      scrollRef.value?.scrollBy({
         top: height.value,
         behavior: 'smooth',
       });

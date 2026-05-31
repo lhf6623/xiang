@@ -68,7 +68,6 @@ declare global {
     list: MapType;
     /** 选中的棋子 */
     active: number[];
-    /** 是否在看历史记录 */
     is_run: boolean;
     /** 点击历史记录 */
     record_index: number;
