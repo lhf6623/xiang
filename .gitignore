@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 pnpm-lock.yaml
+.reasonix
 
 # Editor directories and files
 .idea

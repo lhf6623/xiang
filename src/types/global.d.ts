@@ -1,10 +1,10 @@
 import type { AttributifyAttributes } from 'unocss/preset-attributify';
 
 declare module '@vue/runtime-dom' {
-  interface HTMLAttributes extends AttributifyAttributes {}
+  interface HTMLAttributes extends AttributifyAttributes { }
 }
 
-export {};
+export { };
 
 declare global {
   type PieceColorType = 'isRed' | 'isBlack';

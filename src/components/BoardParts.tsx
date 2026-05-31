@@ -30,23 +30,20 @@ export const Control = defineComponent({
     });
 
     return () => (
-      <footer class='flex flex-row items-center justify-between h-26px w-full px-4px'>
-        <button
-          class='h-20px px-6px text-11px flex items-center bg-#d9d9d9 b-1 b-solid b-#999 rounded-2px cursor-pointer hover-bg-#fff active-bg-#ccc disabled-opacity-40 disabled-cursor-not-allowed'
-          onClick={store.refreshGame}
-        >
+      <footer class='flex-row flex-center justify-between h-26px w-full px-34px overflow-hidden'>
+        <button class='x-button' onClick={store.refreshGame}>
           重新开始
         </button>
         <div class='flex flex-row gap-2px'>
           <button
-            class='h-20px px-6px text-11px flex items-center bg-#d9d9d9 b-1 b-solid b-#999 rounded-2px cursor-pointer hover-bg-#fff active-bg-#ccc disabled-opacity-40 disabled-cursor-not-allowed'
+            class='x-button'
             disabled={isFirst.value}
             onClick={() => nextRecord(-1)}
           >
             上一步
           </button>
           <button
-            class='h-20px px-6px text-11px flex items-center bg-#d9d9d9 b-1 b-solid b-#999 rounded-2px cursor-pointer hover-bg-#fff active-bg-#ccc disabled-opacity-40 disabled-cursor-not-allowed'
+            class='x-button'
             disabled={isLast.value}
             onClick={() => nextRecord(1)}
           >
