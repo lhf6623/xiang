@@ -22,6 +22,7 @@ export const useAppStore = defineStore('app', {
     record: [],
     next: RED,
     deduction_list: [],
+    theme: 'light',
   }),
   actions: {
     /* 重新开始 */
@@ -53,6 +54,11 @@ export const useAppStore = defineStore('app', {
       } else {
         this.active = [];
       }
+    },
+    toggleTheme() {
+      this.theme = this.theme === 'light' ? 'dark' : 'light';
+      document.documentElement.dataset.theme =
+        this.theme === 'dark' ? 'dark' : 'light';
     },
     /** 点击格子，选中 或者 移动棋子 */
     clickLattice(index: number, item: PieceType | null) {

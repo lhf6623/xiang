@@ -1,10 +1,10 @@
 import type { AttributifyAttributes } from 'unocss/preset-attributify';
 
 declare module '@vue/runtime-dom' {
-  interface HTMLAttributes extends AttributifyAttributes { }
+  interface HTMLAttributes extends AttributifyAttributes {}
 }
 
-export { };
+export {};
 
 declare global {
   type PieceColorType = 'isRed' | 'isBlack';
@@ -73,5 +73,7 @@ declare global {
     record_index: number;
     /** 下一个移动棋子的一方 */
     next: PieceColorType;
+    /** 主题 */
+    theme: 'light' | 'dark';
   };
 }

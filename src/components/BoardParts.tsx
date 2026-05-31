@@ -30,50 +30,47 @@ export const Control = defineComponent({
     });
 
     return () => (
-      <footer class='flex-row flex-center justify-between h-26px w-full px-34px overflow-hidden'>
+      <footer class='flex-row flex-center justify-end gap-10px h-26px w-full px-10px overflow-hidden'>
         <button class='x-button' onClick={store.refreshGame}>
           重新开始
         </button>
-        <div class='flex flex-row gap-2px'>
-          <button
-            class='x-button'
-            disabled={isFirst.value}
-            onClick={() => nextRecord(-1)}
-          >
-            上一步
-          </button>
-          <button
-            class='x-button'
-            disabled={isLast.value}
-            onClick={() => nextRecord(1)}
-          >
-            下一步
-          </button>
-        </div>
+        <button
+          class='x-button'
+          disabled={isFirst.value}
+          onClick={() => nextRecord(-1)}
+        >
+          上一步
+        </button>
+        <button
+          class='x-button'
+          disabled={isLast.value}
+          onClick={() => nextRecord(1)}
+        >
+          下一步
+        </button>
+        <button class='x-button' onClick={() => store.toggleTheme()}>
+          {store.theme === 'light' ? '☀️' : '🌙'}
+        </button>
       </footer>
     );
   },
 });
 
-export function Active({ color }: { color: string }) {
+export function Active({ cls }: { cls: string }) {
   return (
     <ul class='absolute top-0 left-0 z-5 w-36px h-36px'>
       <li
-        style={`border-color: ${color}`}
-        class='absolute w-7px h-7px top-1px left-1px b-none b-t b-l b-t-solid b-l-solid'
-      ></li>
+        class={`absolute w-7px h-7px top-1px left-1px b-none b-t b-l b-t-solid b-l-solid ${cls}`}
+      />
       <li
-        style={`border-color: ${color}`}
-        class='absolute w-7px h-7px top-1px right-1px b-none b-t b-r b-t-solid b-r-solid'
-      ></li>
+        class={`absolute w-7px h-7px top-1px right-1px b-none b-t b-r b-t-solid b-r-solid ${cls}`}
+      />
       <li
-        style={`border-color: ${color}`}
-        class='absolute w-7px h-7px bottom-1px left-1px b-none b-b b-l b-b-solid b-l-solid'
-      ></li>
+        class={`absolute w-7px h-7px bottom-1px left-1px b-none b-b b-l b-b-solid b-l-solid ${cls}`}
+      />
       <li
-        style={`border-color: ${color}`}
-        class='absolute w-7px h-7px bottom-1px right-1px b-none b-b b-r b-b-solid b-r-solid'
-      ></li>
+        class={`absolute w-7px h-7px bottom-1px right-1px b-none b-b b-r b-b-solid b-r-solid ${cls}`}
+      />
     </ul>
   );
 }

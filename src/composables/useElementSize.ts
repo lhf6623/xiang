@@ -1,8 +1,9 @@
 import { ref, onMounted, onBeforeUnmount, type Ref } from 'vue';
 
-export function useElementSize(
-  target: Ref<HTMLElement | null>,
-): { width: Ref<number>; height: Ref<number> } {
+export function useElementSize(target: Ref<HTMLElement | null>): {
+  width: Ref<number>;
+  height: Ref<number>;
+} {
   const width = ref(0);
   const height = ref(0);
 

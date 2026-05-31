@@ -257,7 +257,7 @@ export const piece_list: PieceType[] = [
  */
 export const initMap = (list = piece_list) => {
   const mapList: MapType = Array(COL * ROW).fill(NULL);
-  list?.length &&
+  if (list?.length)
     list.forEach((item) => {
       const { index } = item;
       mapList[index] = { ...item };
