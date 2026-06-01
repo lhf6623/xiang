@@ -49,7 +49,7 @@ export const Control = defineComponent({
           下一步
         </button>
         <button class='x-button' onClick={() => store.toggleTheme()}>
-          {store.theme === 'light' ? '☀️' : '🌙'}
+          {{ light: '☀️', dark: '🌙', 'chinese-red': '🏮' }[store.theme]}
         </button>
       </footer>
     );

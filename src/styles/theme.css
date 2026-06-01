@@ -29,3 +29,19 @@
   --c-active-black: #cccccc;
   --c-shadow: rgba(255, 255, 255, 0.08);
 }
+
+[data-theme='chinese-red'] {
+  --c-bg: #fff8f5;
+  --c-board: #fdf0e6;
+  --c-line: #8b1a1a;
+  --c-text: #3d0000;
+  --c-accent: #c41e1e;
+  --c-river: #8b1a1a;
+  --c-hover: rgba(196, 30, 30, 0.1);
+  --c-active: rgba(196, 30, 30, 0.2);
+  --c-black: #1a1a1a;
+  --c-red: #c41e1e;
+  --c-active-red: #c41e1e;
+  --c-active-black: #1a1a1a;
+  --c-shadow: rgba(139, 26, 26, 0.12);
+}

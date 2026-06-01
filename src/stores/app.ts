@@ -6,8 +6,6 @@ import { NULL, RED, BLACK, piece_list } from '@/utils/data';
 
 import { makingChess, initMap } from '@/utils';
 import { run_rule } from '@/utils/run-rule';
-import { cloneDeep, isEmpty } from 'lodash-es';
-
 import { version_key } from '@/utils';
 
 export const store = createPinia();
@@ -56,9 +54,10 @@ export const useAppStore = defineStore('app', {
       }
     },
     toggleTheme() {
-      this.theme = this.theme === 'light' ? 'dark' : 'light';
-      document.documentElement.dataset.theme =
-        this.theme === 'dark' ? 'dark' : 'light';
+      const themes: AppStoreType['theme'][] = ['light', 'dark', 'chinese-red'];
+      const idx = themes.indexOf(this.theme);
+      this.theme = themes[(idx + 1) % themes.length];
+      document.documentElement.dataset.theme = this.theme;
     },
     /** 点击格子，选中 或者 移动棋子 */
     clickLattice(index: number, item: PieceType | null) {
@@ -80,7 +79,7 @@ export const useAppStore = defineStore('app', {
           // 不在棋子可行走范围内
           if (!this.active.includes(index)) return;
         }
-        const _mapList = cloneDeep(this.list);
+        const _mapList = structuredClone(this.list);
 
         this.list[index] = { ..._piece, index };
         this.list[pieceIndex] = NULL;
@@ -97,7 +96,7 @@ export const useAppStore = defineStore('app', {
       }
 
       // 选中棋子
-      if (item !== NULL && isEmpty(this.active) && this.next === item.type) {
+      if (item !== NULL && this.active.length === 0 && this.next === item.type) {
         this.setActive(item);
       }
     },

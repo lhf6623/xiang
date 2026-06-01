@@ -16,8 +16,6 @@ import {
   isBLACK,
   isRED,
 } from './data';
-import { ceil } from 'lodash-es';
-
 // 找出这个棋子下一步的所有可能位置
 export const run_rule: RunRule = {
   che: (map, { index: pieceIndex, type: pieceType }) => {
@@ -79,7 +77,7 @@ export const run_rule: RunRule = {
       const _y = y + row;
       const index = getIndex(_y, _x);
       // 马脚
-      const [bX, bY] = lineRule[ceil((i + 1) / 2) - 1];
+      const [bX, bY] = lineRule[Math.ceil((i + 1) / 2) - 1];
       const bIndex = getIndex(y + bY, x + bX);
       if (isInMap(_x, _y) && isNULL(map[bIndex]) && isPass(map, index, type)) {
         return [index];

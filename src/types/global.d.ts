@@ -74,6 +74,6 @@ declare global {
     /** 下一个移动棋子的一方 */
     next: PieceColorType;
     /** 主题 */
-    theme: 'light' | 'dark';
+    theme: 'light' | 'dark' | 'chinese-red';
   };
 }

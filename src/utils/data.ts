@@ -1,5 +1,3 @@
-import { inRange } from 'lodash-es';
-
 /** 黑棋X轴文字 */
 export const numbers: NumType[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 /** 红旗X轴文字 */
@@ -35,7 +33,7 @@ export function indexToXY(index: number): { x: number; y: number } {
  * 在地图上
  */
 export const isInMap = (col: number, row: number) =>
-  inRange(col, 0, COL) && inRange(row, 0, ROW);
+  col >= 0 && col < COL && row >= 0 && row < ROW;
 
 /**
  * 判断所在位置是否可以走步
