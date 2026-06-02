@@ -1,7 +1,11 @@
 {
   "name": "xiang-app",
   "private": true,
-  "version": "0.3.3",
+  "version": "0.3.4",
+  "description": "中国象棋",
+  "author": "lhf6623",
+  "license": "MIT",
+  "repository": "https://github.com/lhf6623/xiang",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,7 +13,9 @@
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{ts,tsx,vue,css}\"",
     "lint": "eslint \"src/**/*.{ts,tsx,vue}\"",
-    "check": "pnpm lint && pnpm format"
+    "check": "pnpm lint && pnpm format",
+    "sync-version": "node scripts/sync-version.mjs",
+    "prepare": "husky"
   },
   "dependencies": {
     "@unocss/reset": "^66.7.0",
@@ -28,6 +34,7 @@
     "esbuild": "^0.25.0",
     "eslint": "^10.4.1",
     "eslint-plugin-vue": "^10.9.1",
+    "husky": "^9.1.7",
     "prettier": "^3.8.3",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.60.0",

@@ -1,0 +1,2 @@
+pnpm sync-version
+git add src-tauri/Cargo.toml src-tauri/tauri.conf.json

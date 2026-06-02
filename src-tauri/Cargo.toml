@@ -1,14 +1,12 @@
 [package]
-name = "app"
-version = "0.3.3"
-description = "A Tauri App"
-authors = ["you"]
-license = ""
-repository = ""
+name = "xiang-app"
+version = "0.3.4"
+description = "中国象棋"
+authors = ["lhf6623"]
+license = "MIT"
+repository = "https://github.com/lhf6623/xiang"
 edition = "2021"
 rust-version = "1.77.2"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [lib]
 name = "app_lib"
