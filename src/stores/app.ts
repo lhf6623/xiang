@@ -79,7 +79,7 @@ export const useAppStore = defineStore('app', {
           // 不在棋子可行走范围内
           if (!this.active.includes(index)) return;
         }
-        const _mapList = structuredClone(this.list);
+        const _mapList = this.list.map((v) => (v !== NULL ? { ...v } : NULL));
 
         this.list[index] = { ..._piece, index };
         this.list[pieceIndex] = NULL;
