@@ -94,7 +94,7 @@
   /* 棋子 */
   --c-piece-bg: #f5ecd7; /* 棋子外圈 — 象牙白，传统象棋棋子本色 */
   --c-piece-inner-bg: #f5ecd7; /* 棋子内圈 — 同象牙白 */
-  --c-piece-side-black: #9a6b60; /* 黑方（调整）— 暖棕/墨褐，提升与棋盘对比度 */
+  --c-piece-side-black: #2d1216; /* 黑方（调整）— 暖棕/墨褐，提升与棋盘对比度 */
   --c-piece-side-red: #c42d2d; /* 红方 — 朱膘，象牙白上的鲜明红 */
   --c-piece-side-black-active: #d4a574; /* 选中标记 — 泥金，在象牙棋子+红木棋盘上都突出 */
   --c-piece-side-red-active: #d4a574; /* 选中标记 — 同泥金 */
