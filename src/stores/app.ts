@@ -21,6 +21,7 @@ export const useAppStore = defineStore('app', {
     next: RED,
     deduction_list: [],
     theme: 'light',
+    lastMove: null,
   }),
   actions: {
     /* 重新开始 */
@@ -32,10 +33,12 @@ export const useAppStore = defineStore('app', {
       this.record = [];
       this.record_index = -1;
       this.deduction_list = [];
+      this.lastMove = null;
     },
     /** 读取记录 */
     readRecord(index: number, list?: PieceType[]) {
       this.active = [];
+      this.lastMove = null;
       this.record_index = index;
       const pieceList = index < 0 ? piece_list : this.record[index].list;
 
@@ -54,7 +57,7 @@ export const useAppStore = defineStore('app', {
       }
     },
     toggleTheme() {
-      const themes: AppStoreType['theme'][] = ['light', 'dark', 'chinese-red'];
+      const themes: AppStoreType['theme'][] = ['light', 'dark', 'chinese-red', 'celadon'];
       const idx = themes.indexOf(this.theme);
       this.theme = themes[(idx + 1) % themes.length];
       document.documentElement.dataset.theme = this.theme;
@@ -81,8 +84,12 @@ export const useAppStore = defineStore('app', {
         }
         const _mapList = this.list.map((v) => (v !== NULL ? { ...v } : NULL));
 
-        this.list[index] = { ..._piece, index };
-        this.list[pieceIndex] = NULL;
+        // 通过创建新数组引用触发 Vue 响应式更新
+        const list = [...this.list];
+        list[index] = { ..._piece, index };
+        list[pieceIndex] = NULL;
+        this.list = list;
+        this.lastMove = { from: pieceIndex, to: index };
         this.setActive(null);
 
         this.next = this.next === RED ? BLACK : RED;

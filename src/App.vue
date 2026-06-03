@@ -1,7 +1,7 @@
 <template>
   <div class="h-full w-full relative flex-center">
     <div
-      class="w-516px flex-shrink-0 h-434px shadow-chess relative flex-center flex-col gap-4px overflow-hidden p-4px text-16px text-chess-text bg-chess-bg"
+      class="w-516px flex-shrink-0 h-434px shadow-chess relative flex-center flex-col gap-4px overflow-hidden p-4px text-16px text-chess-text bg-chess-app-bg"
     >
       <section class="w-full flex flex-row gap-4px h-full">
         <Maps />

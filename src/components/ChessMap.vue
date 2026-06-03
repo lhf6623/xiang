@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative flex flex-col items-center w-324px h-400px bg-chess-board select-none cursor-pointer shadow-chess"
+    class="relative flex flex-col items-center w-324px h-400px bg-chess-board-bg select-none cursor-pointer shadow-chess"
   >
     <NumberList :list="numbers" />
     <div class="relative w-324px h-360px">
@@ -16,7 +16,7 @@
           :width="verticalX[8] - verticalX[0] + 12"
           :height="horizontalLines[9] - horizontalLines[0] + 12"
           fill="none"
-          class="stroke-chess-line"
+          class="stroke-chess-board-line"
           stroke-width="2"
         />
         <rect
@@ -25,7 +25,7 @@
           :width="verticalX[8] - verticalX[0]"
           :height="horizontalLines[9] - horizontalLines[0]"
           fill="none"
-          class="stroke-chess-line"
+          class="stroke-chess-board-line"
           stroke-width="1"
         />
         <line
@@ -35,7 +35,7 @@
           :x2="verticalX[8] + 0.5"
           :y1="y"
           :y2="y"
-          class="stroke-chess-line"
+          class="stroke-chess-board-line"
           stroke-width="1"
         />
         <template v-for="x in verticalX.slice(1, -1)" :key="x">
@@ -44,7 +44,7 @@
             :x2="x"
             :y1="horizontalLines[0] - 0.5"
             :y2="riverTop + 0.5"
-            class="stroke-chess-line"
+            class="stroke-chess-board-line"
             stroke-width="1"
           />
           <line
@@ -52,7 +52,7 @@
             :x2="x"
             :y1="riverBottom - 0.5"
             :y2="horizontalLines[9] + 0.5"
-            class="stroke-chess-line"
+            class="stroke-chess-board-line"
             stroke-width="1"
           />
         </template>
@@ -63,7 +63,7 @@
           :y1="d.y1"
           :x2="d.x2"
           :y2="d.y2"
-          class="stroke-chess-line"
+          class="stroke-chess-board-line"
           stroke-width="1"
         />
         <text
@@ -72,7 +72,7 @@
           text-anchor="middle"
           dominant-baseline="central"
           font-size="4"
-          class="fill-chess-river"
+          class="fill-chess-board-river"
         >
           楚 河 汉 界
         </text>
@@ -81,7 +81,7 @@
           :key="'s-' + i"
           :d="s"
           fill="none"
-          class="stroke-chess-line"
+          class="stroke-chess-board-line"
           stroke-width="1"
           stroke-linecap="square"
           stroke-linejoin="round"
@@ -95,8 +95,16 @@
           :data="item"
           :active="tipsActive"
           :index="index"
+          :isLastMoved="store.lastMove?.to === index"
         />
       </div>
+      <!-- 原位标记：棋子移动前的位置（实心圆点，呼吸） -->
+      <div
+        v-if="store.lastMove"
+        class="absolute z-2 w-12px h-12px rounded-full pointer-events-none"
+        :class="originMarkerClass"
+        :style="originMarkerStyle"
+      />
     </div>
     <NumberList :list="numbers_cn" />
   </div>
@@ -105,7 +113,7 @@
 <script setup lang="ts">
   import ChessPiece from './ChessPiece.vue';
   import { computed, onMounted } from 'vue';
-  import { numbers, numbers_cn } from '@/utils/data';
+  import { numbers, numbers_cn, RED } from '@/utils/data';
   import { NumberList } from './BoardParts';
   import { useAppStore } from '@/stores/app';
 
@@ -190,4 +198,26 @@
     store.readRecord(store.record.length - 1);
   });
   const tipsActive = computed(() => (store.active.length ? store.active : []));
+
+  // 原位标记样式
+  const DOT = 12; // 实心圆点直径
+  const originMarkerStyle = computed(() => {
+    if (!store.lastMove) return {};
+    const from = store.lastMove.from;
+    const col = from % 9;
+    const row = Math.floor(from / 9);
+    return {
+      left: `${col * CELL + (CELL - DOT) / 2}px`,
+      top: `${row * CELL + (CELL - DOT) / 2}px`,
+    };
+  });
+
+  const originMarkerClass = computed(() => {
+    if (!store.lastMove) return '';
+    const movedPiece = store.list[store.lastMove.to];
+    if (!movedPiece) return '';
+    return movedPiece.type === RED
+      ? 'origin-marker-red'
+      : 'origin-marker-black';
+  });
 </script>

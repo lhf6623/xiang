@@ -1,9 +1,9 @@
 <template>
   <div
-    class="shadow-chess flex flex-col bg-chess-bg text-12px overflow-hidden w-180px min-w-180px h-full"
+    class="shadow-chess flex flex-col bg-chess-app-bg text-12px overflow-hidden w-180px min-w-180px h-full"
   >
     <header
-      class="px-8px h-22px flex-shrink-0 flex items-center text-12px font-bold text-chess-text b-b-1 b-solid b-chess-line"
+      class="px-8px h-22px flex-shrink-0 flex items-center text-12px font-bold text-chess-text b-b-1 b-solid b-chess-border"
     >
       棋谱序列
       <span v-if="!store.is_run" class="scale-75 inline-block">[历史]</span>
@@ -11,7 +11,7 @@
     <div ref="scrollRef" class="flex-1 h-full overflow-y-auto">
       <ul ref="recordRef" class="text-center">
         <li
-          :class="`b-b ${isStart ? 'bg-chess-active font-bold' : ''}`"
+          :class="`b-b ${isStart ? 'bg-chess-active-bg font-bold' : ''}`"
           @click="store.readRecord(-1)"
         >
           ===棋局开始===
@@ -24,13 +24,13 @@
           <span @click="readRecord(index, 0)" class="w-54% text-left pl-3">
             <span>{{ index < 9 ? '&nbsp;' : '' }}</span>
             <span>{{ index + 1 }}.</span>
-            <span :class="`hover:bg-chess-hover ${getAcriveStyle(index, 0)}`">
+            <span :class="`hover:bg-chess-hover-bg ${getAcriveStyle(index, 0)}`">
               {{ item1.name }}
             </span>
           </span>
           <span @click="readRecord(index, 1)" class="flex-1 text-left">
             <span
-              class="hover:bg-chess-hover"
+              class="hover:bg-chess-hover-bg"
               :class="`${getAcriveStyle(index, 1)}`"
             >
               {{ item2?.name }}
@@ -87,6 +87,6 @@
   function getAcriveStyle(index: number, type: 0 | 1) {
     const isActive = index * 2 + type === store.record_index;
 
-    return isActive ? 'bg-chess-active font-bold' : '';
+    return isActive ? 'bg-chess-active-bg font-bold' : '';
   }
 </script>

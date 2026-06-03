@@ -3,11 +3,11 @@
     <!-- 棋子 -->
     <div
       v-show="data"
-      class="absolute shadow-chess text-center text-16px w-34px h-34px rounded-full z-99 b b-solid bg-chess-bg"
-      :class="borderClass"
+      class="absolute shadow-chess text-center text-16px w-34px h-34px rounded-full z-99 b b-solid bg-chess-piece-bg transition-all duration-200"
+      :class="[borderClass, lastMovedShadowClass]"
     >
       <div
-        class="w-28px h-28px flex-center b b-solid absolute top-2px left-2px rounded-full"
+        class="w-28px h-28px flex-center b b-solid absolute top-2px left-2px rounded-full bg-chess-piece-inner-bg"
         :class="borderClass"
       >
         {{ data?.text }}
@@ -35,18 +35,29 @@
       type: Array as PropType<number[]>,
       default: () => [],
     },
+    isLastMoved: {
+      type: Boolean,
+      default: false,
+    },
   });
 
   const borderClass = computed(() => {
     if (!props.data) return '';
     return props.data.type === RED
-      ? 'b-chess-red text-chess-red'
-      : 'b-chess-black text-chess-black';
+      ? 'b-chess-piece-side-red text-chess-piece-side-red'
+      : 'b-chess-piece-side-black text-chess-piece-side-black';
+  });
+
+  const lastMovedShadowClass = computed(() => {
+    if (!props.isLastMoved || !props.data) return '';
+    return props.data.type === RED
+      ? 'shadow-last-moved-red'
+      : 'shadow-last-moved-black';
   });
 
   const activeColorClass = computed(() => {
     const isRed = props.active.findIndex((item) => item === props.index) === 0;
-    return isRed ? 'border-chess-active-red' : 'border-chess-active-black';
+    return isRed ? 'border-chess-piece-side-red-active' : 'border-chess-piece-side-black-active';
   });
 
   const showActive = computed(() => {

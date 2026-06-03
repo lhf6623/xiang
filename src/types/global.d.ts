@@ -74,6 +74,8 @@ declare global {
     /** 下一个移动棋子的一方 */
     next: PieceColorType;
     /** 主题 */
-    theme: 'light' | 'dark' | 'chinese-red';
+    theme: 'light' | 'dark' | 'chinese-red' | 'celadon';
+    /** 上一步移动信息 */
+    lastMove: { from: number; to: number } | null;
   };
 }

@@ -1,47 +1,252 @@
+/* ===== 浅色主题 ===== */
 :root {
-  --c-bg: #ffffff;
-  --c-board: #f5f0ec;
-  --c-line: #000000;
-  --c-text: #000000;
-  --c-accent: #c04040;
-  --c-river: #000000;
-  --c-hover: rgba(192, 64, 64, 0.1);
-  --c-active: rgba(192, 64, 64, 0.2);
-  --c-black: #000000;
-  --c-red: #ff0000;
-  --c-active-red: #ff0000;
-  --c-active-black: #000000;
-  --c-shadow: rgba(0, 0, 0, 0.12);
+  /* 应用 */
+  --c-app-bg: #fafaf9;            /* 应用背景 — 暖白纸色 */
+  --c-text: #1c1c1e;              /* 通用文字 — 近黑，不用纯黑避免刺眼 */
+  --c-accent: #c04040;            /* 强调色 — 沉稳朱红 */
+  --c-shadow: rgba(0, 0, 0, 0.05); /* 阴影 — 极淡 */
+
+  /* 棋盘 */
+  --c-board-bg: #f5f0e8;          /* 棋盘底色 — 微暖木纹感 */
+  --c-board-line: #1c1c1e;        /* 网格线 — 近黑，清晰利落 */
+  --c-board-river: #1c1c1e;       /* 楚河汉界 — 与线同色 */
+
+  /* 棋子 */
+  --c-piece-bg: #fafaf9;          /* 棋子外圈背景 */
+  --c-piece-inner-bg: #fafaf9;    /* 棋子内圈背景 */
+  --c-piece-side-black: #1c1c1e;  /* 黑方 — 近黑 */
+  --c-piece-side-red: #c04040;    /* 红方 — 朱红 */
+  --c-piece-side-black-active: #1c1c1e; /* 黑方选中标记 */
+  --c-piece-side-red-active: #c04040;   /* 红方选中标记 */
+
+  /* 走棋标记 */
+  --c-move-marker-red: var(--c-piece-side-red);
+  --c-move-marker-black: var(--c-piece-side-black);
+
+  /* UI 组件 */
+  --c-border: #e0e0e0;            /* 组件边框 — 淡灰，只起分隔作用 */
+  --c-hover-bg: rgba(192, 64, 64, 0.06);  /* 悬停背景 */
+  --c-active-bg: rgba(192, 64, 64, 0.12); /* 选中高亮背景 */
+
+  /* 禁用状态 */
+  --c-disabled-text: #a3a3a3;
+  --c-disabled-border: #e0e0e0;
+  --c-disabled-bg: transparent;
+
+  /* 滚动条 */
+  --c-scrollbar-thumb: #d4d4d4;
+  --c-scrollbar-track: transparent;
 }
 
+/* ===== 深色主题 ===== */
 [data-theme='dark'] {
-  --c-bg: #1a1a1a;
-  --c-board: #252525;
-  --c-line: #cccccc;
-  --c-text: #eeeeee;
-  --c-accent: #ff6666;
-  --c-river: #cccccc;
-  --c-hover: rgba(255, 102, 102, 0.12);
-  --c-active: rgba(255, 102, 102, 0.22);
-  --c-black: #cccccc;
-  --c-red: #ff6666;
-  --c-active-red: #ff6666;
-  --c-active-black: #cccccc;
-  --c-shadow: rgba(255, 255, 255, 0.08);
+  /* 应用 */
+  --c-app-bg: #1c1c1e;            /* 应用背景 — iOS 风格深灰，不纯黑 */
+  --c-text: #e4e4e4;              /* 通用文字 — 柔白 */
+  --c-accent: #d46060;            /* 强调色 — 略鲜明的红 */
+  --c-shadow: rgba(0, 0, 0, 0.30); /* 阴影 */
+
+  /* 棋盘 */
+  --c-board-bg: #242426;          /* 棋盘底色 — 微亮于背景，形成层次 */
+  --c-board-line: #8e8e8e;        /* 网格线 — 中灰，柔和 */
+  --c-board-river: #8e8e8e;       /* 楚河汉界 */
+
+  /* 棋子 */
+  --c-piece-bg: #1c1c1e;          /* 棋子外圈 */
+  --c-piece-inner-bg: #1c1c1e;    /* 棋子内圈 */
+  --c-piece-side-black: #e4e4e4;  /* 黑方 — 浅灰，在深色背景上清晰可辨 */
+  --c-piece-side-red: #d46060;    /* 红方 */
+  --c-piece-side-black-active: #e4e4e4;
+  --c-piece-side-red-active: #d46060;
+
+  /* 走棋标记 */
+  --c-move-marker-red: var(--c-piece-side-red);
+  --c-move-marker-black: var(--c-piece-side-black);
+
+  /* UI 组件 */
+  --c-border: #3a3a3c;            /* 组件边框 — 暗灰 */
+  --c-hover-bg: rgba(212, 96, 96, 0.08);
+  --c-active-bg: rgba(212, 96, 96, 0.16);
+
+  /* 禁用状态 */
+  --c-disabled-text: #555555;
+  --c-disabled-border: #3a3a3c;
+  --c-disabled-bg: transparent;
+
+  /* 滚动条 */
+  --c-scrollbar-thumb: #3a3a3c;
+  --c-scrollbar-track: transparent;
 }
 
+/* ===== 中国红主题（大漆朱红） ===== */
 [data-theme='chinese-red'] {
-  --c-bg: #fff8f5;
-  --c-board: #fdf0e6;
-  --c-line: #8b1a1a;
-  --c-text: #3d0000;
-  --c-accent: #c41e1e;
-  --c-river: #8b1a1a;
-  --c-hover: rgba(196, 30, 30, 0.1);
-  --c-active: rgba(196, 30, 30, 0.2);
-  --c-black: #1a1a1a;
-  --c-red: #c41e1e;
-  --c-active-red: #c41e1e;
-  --c-active-black: #1a1a1a;
-  --c-shadow: rgba(139, 26, 26, 0.12);
+  /* 应用 */
+  --c-app-bg: #2d1216;            /* 应用背景 — 陈年漆器红褐 */
+  --c-text: #e8d5c4;              /* 通用文字 — 泥金暖白 */
+  --c-accent: #d4a574;            /* 强调色 — 古铜金 */
+  --c-shadow: rgba(0, 0, 0, 0.40); /* 阴影 — 深沉 */
+
+  /* 棋盘 */
+  --c-board-bg: #3d2520;          /* 棋盘底色 — 红木，微亮于背景形成层次 */
+  --c-board-line: #c9a87c;        /* 网格线 — 泥金，沉静不刺眼 */
+  --c-board-river: #c9a87c;       /* 楚河汉界 — 同线色 */
+
+  /* 棋子 */
+  --c-piece-bg: #f5ecd7;          /* 棋子外圈 — 象牙白，传统象棋棋子本色 */
+  --c-piece-inner-bg: #f5ecd7;    /* 棋子内圈 — 同象牙白 */
+  --c-piece-side-black: #2d1216;  /* 黑方 — 漆墨色，与背景呼应 */
+  --c-piece-side-red: #c42d2d;    /* 红方 — 朱膘，象牙白上的鲜明红 */
+  --c-piece-side-black-active: #d4a574; /* 选中标记 — 泥金，在象牙棋子+红木棋盘上都突出 */
+  --c-piece-side-red-active: #d4a574;   /* 选中标记 — 同泥金 */
+
+  /* 走棋标记 — 金色在深色棋盘和象牙棋子上都醒目 */
+  --c-move-marker-red: var(--c-piece-side-red);
+  --c-move-marker-black: #d4a574;
+
+  /* UI 组件 */
+  --c-border: #c9a87c;            /* 组件边框 — 泥金，与棋盘线统一 */
+  --c-hover-bg: rgba(212, 167, 116, 0.10);   /* 悬停 — 金色微光 */
+  --c-active-bg: rgba(212, 167, 116, 0.20);  /* 选中 — 金色加深 */
+
+  /* 禁用状态 */
+  --c-disabled-text: #7a5a5a;
+  --c-disabled-border: #5a3a3a;
+  --c-disabled-bg: transparent;
+
+  /* 滚动条 */
+  --c-scrollbar-thumb: #5a3a3a;
+  --c-scrollbar-track: transparent;
+}
+
+/* ===== 青瓷主题（宋瓷冷调） ===== */
+[data-theme='celadon'] {
+  /* 应用 */
+  --c-app-bg: #f2f6f3;            /* 应用背景 — 越窑青釉，淡青灰白 */
+  --c-text: #2c3a30;              /* 通用文字 — 墨绿近黑 */
+  --c-accent: #5a8a6a;            /* 强调色 — 青绿，汝窑天青感 */
+  --c-shadow: rgba(0, 0, 0, 0.05); /* 阴影 — 极淡 */
+
+  /* 棋盘 */
+  --c-board-bg: #e8efe5;          /* 棋盘底色 — 古玉青灰，微暖于背景 */
+  --c-board-line: #2c3a30;        /* 网格线 — 墨绿，清晰但不生硬 */
+  --c-board-river: #2c3a30;       /* 楚河汉界 */
+
+  /* 棋子 */
+  --c-piece-bg: #f2f6f3;          /* 棋子外圈 */
+  --c-piece-inner-bg: #f2f6f3;    /* 棋子内圈 */
+  --c-piece-side-black: #2c3a30;  /* 黑方 — 墨绿 */
+  --c-piece-side-red: #b8453a;    /* 红方 — 暖朱砂，青底上的补色点睛 */
+  --c-piece-side-black-active: #2c3a30;
+  --c-piece-side-red-active: #b8453a;
+
+  /* 走棋标记 */
+  --c-move-marker-red: var(--c-piece-side-red);
+  --c-move-marker-black: var(--c-piece-side-black);
+
+  /* UI 组件 */
+  --c-border: #c4d4c0;            /* 组件边框 — 淡青灰 */
+  --c-hover-bg: rgba(90, 138, 106, 0.06);   /* 悬停 — 青绿微光 */
+  --c-active-bg: rgba(90, 138, 106, 0.12);  /* 选中 */
+
+  /* 禁用状态 */
+  --c-disabled-text: #a0b0a0;
+  --c-disabled-border: #c4d4c0;
+  --c-disabled-bg: transparent;
+
+  /* 滚动条 */
+  --c-scrollbar-thumb: #c4d4c0;
+  --c-scrollbar-track: transparent;
+}
+
+/* ===== 移动标记 ===== */
+
+/* 原位标记 — 单向向外扩散 */
+@keyframes origin-ripple {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* 棋子光晕 — 伪元素环向外扩散 */
+@keyframes piece-ring-ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* 原位标记：实心圆点 — 红方（双层涟漪） */
+.origin-marker-red {
+  background: var(--c-move-marker-red);
+  animation: origin-ripple 1.8s ease-out infinite;
+}
+.origin-marker-red::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--c-move-marker-red);
+  animation: origin-ripple 1.8s ease-out 0.9s infinite;
+}
+/* 原位标记：实心圆点 — 黑方（双层涟漪） */
+.origin-marker-black {
+  background: var(--c-move-marker-black);
+  animation: origin-ripple 1.8s ease-out infinite;
+}
+.origin-marker-black::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--c-move-marker-black);
+  animation: origin-ripple 1.8s ease-out 0.9s infinite;
+}
+
+/* 棋子移动后的光晕 — 红方（::after 环扩散） */
+.shadow-last-moved-red::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 2px solid var(--c-move-marker-red);
+  pointer-events: none;
+  animation: piece-ring-ripple 1.8s ease-out infinite;
+}
+/* 棋子移动后的光晕 — 黑方（::after 环扩散） */
+.shadow-last-moved-black::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 2px solid var(--c-move-marker-black);
+  pointer-events: none;
+  animation: piece-ring-ripple 1.8s ease-out infinite;
+}
+
+/* ===== 滚动条 ===== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--c-scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--c-scrollbar-thumb);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c-accent);
 }
