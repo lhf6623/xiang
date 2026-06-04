@@ -1,6 +1,6 @@
 <template>
   <div
-    class="shadow-chess flex flex-col bg-chess-app-bg text-12px overflow-hidden w-180px min-w-180px h-full"
+    class="shadow-chess !h-400px flex flex-col bg-chess-app-bg text-12px overflow-hidden w-180px min-w-180px h-full"
   >
     <header
       class="px-8px h-22px flex-shrink-0 flex items-center text-12px font-bold text-chess-text b-b-1 b-solid b-chess-border"
@@ -21,10 +21,12 @@
           class="relative flex-center gap-2 b-b"
           :key="index"
         >
-          <span @click="readRecord(index, 0)" class="w-54% text-left pl-3">
+          <span @click="readRecord(index, 0)" class="w-58% text-left pl-2">
             <span>{{ index < 9 ? '&nbsp;' : '' }}</span>
             <span>{{ index + 1 }}.</span>
-            <span :class="`hover:bg-chess-hover-bg ${getAcriveStyle(index, 0)}`">
+            <span
+              :class="`hover:bg-chess-hover-bg ${getAcriveStyle(index, 0)}`"
+            >
               {{ item1.name }}
             </span>
           </span>

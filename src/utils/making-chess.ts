@@ -48,7 +48,7 @@ export const getText3 = (
   // 直线
   if (beforeY === afterY) return PING;
 
-  // 红棋，移动前棋子 小于当前棋子 进，反之 退
+  // 红棋，移动前棋子 小于当前棋子 退，反之 进
   // 黑棋，移动前棋子 小于当前棋子 进，反之 退
   if (isRed) {
     return beforeIndex < afterIndex ? TUI : JIN;
