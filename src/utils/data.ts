@@ -21,7 +21,7 @@ export const RED: PieceColorType = 'isRed';
 /** 除兵外第三个字 "进", "退", "平" */
 export const text3: PieceKinesis[] = ['进', '退', '平'];
 /** 除兵外多个棋子在一条Y轴的第一个字 "前", "后" */
-export const text1: PiecePlace[] = ['前', '后'];
+export const text1: PiecePlace[] = ['前', '中', '后'];
 
 export function indexToXY(index: number): { x: number; y: number } {
   return {

@@ -1,7 +1,7 @@
 import { indexToXY, isNULL, isRED } from './data';
 import { numbers, numbers_cn, text1, text3 } from './data';
 
-const [QIAN, HOU] = text1;
+const [QIAN, ZHONG, HOU] = text1;
 const [JIN, TUI, PING] = text3;
 
 /**
@@ -102,6 +102,7 @@ const getText1 = (mapArr: MapType, piece: PieceType): string => {
   const pieceIndex = yArr.indexOf(index);
   if (pieceIndex === 0) return `${QIAN}${text}`;
   if (pieceIndex === yArr.length - 1) return `${HOU}${text}`;
+  if (yArr.length === 3 && pieceIndex === 1) return `${ZHONG}${text}`;
 
   const text_num = isRed
     ? numbers_cn.toReversed()[pieceIndex]

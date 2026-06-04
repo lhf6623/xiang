@@ -35,7 +35,7 @@ declare global {
 
   /** 棋子动作 */
   type PieceKinesis = '进' | '退' | '平';
-  type PiecePlace = '前' | '后';
+  type PiecePlace = '前' | '中' | '后';
 
   type AllTextType =
     | PieceTextType
