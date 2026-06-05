@@ -31,9 +31,4 @@
     // 初始化主题
     document.documentElement.dataset.theme = store.theme;
   });
-
-  // 1、机器人对局 写一个算法出来，可以人机对局
-  // 2、历史对局推演
-  // ---TODO: 棋谱生成好像存在问题 两列兵 一列三个 一列两个 这个有差异
-  // 3、棋谱输入可以直观的感受到棋谱和棋子的关系
 </script>

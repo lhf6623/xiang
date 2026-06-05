@@ -1,5 +1,6 @@
 export { makingChess } from './making-chess';
 export { initMap } from './data';
+export { isInCheck, isCheckmate, isStalemate, getSafeMoves } from './check';
 
 import pkg from '../../package.json';
 

@@ -6,6 +6,8 @@ import { NULL, RED, BLACK, piece_list } from '@/utils/data';
 
 import { makingChess, initMap } from '@/utils';
 import { run_rule } from '@/utils/run-rule';
+import { isMoveSafe, isInCheck, isCheckmate, isStalemate } from '@/utils/check';
+import { gameEvent } from '@/utils/eventBus';
 import { version_key } from '@/utils';
 
 export const store = createPinia();
@@ -34,11 +36,13 @@ export const useAppStore = defineStore('app', {
       this.record_index = -1;
       this.deduction_list = [];
       this.lastMove = null;
+      gameEvent.clear();
     },
     /** 读取记录 */
     readRecord(index: number, list?: PieceType[]) {
       this.active = [];
       this.lastMove = null;
+      gameEvent.clear();
       this.record_index = index;
       const pieceList = index < 0 ? piece_list : this.record[index].list;
 
@@ -49,15 +53,19 @@ export const useAppStore = defineStore('app', {
     /** 棋盘格子的活动状态 */
     setActive(piece: PieceType | null | undefined) {
       if (piece) {
-        const { code, index } = piece;
-        const run_lattice = run_rule[code]?.(this.list, piece) || [];
-        this.active = [index, ...run_lattice];
+        const moves = run_rule[piece.code]?.(this.list, piece) || [];
+        this.active = [piece.index, ...moves];
       } else {
         this.active = [];
       }
     },
     toggleTheme() {
-      const themes: AppStoreType['theme'][] = ['light', 'dark', 'chinese-red', 'celadon'];
+      const themes: AppStoreType['theme'][] = [
+        'light',
+        'dark',
+        'chinese-red',
+        'celadon',
+      ];
       const idx = themes.indexOf(this.theme);
       this.theme = themes[(idx + 1) % themes.length];
       document.documentElement.dataset.theme = this.theme;
@@ -82,6 +90,13 @@ export const useAppStore = defineStore('app', {
           // 不在棋子可行走范围内
           if (!this.active.includes(index)) return;
         }
+
+        // 走后是否会导致己方被将军
+        if (!isMoveSafe(this.list, pieceIndex, index, _piece.type)) {
+          gameEvent.emit('illegal-move');
+          return;
+        }
+
         const _mapList = this.list.map((v) => (v !== NULL ? { ...v } : NULL));
 
         // 通过创建新数组引用触发 Vue 响应式更新
@@ -99,11 +114,29 @@ export const useAppStore = defineStore('app', {
           list: this.list.flatMap((item) => (item === NULL ? [] : [item])),
         });
         this.record_index = this.record.length - 1;
+
+        // 判断将军/将死/困毙
+        if (isCheckmate(this.list, this.next)) {
+          gameEvent.emit('checkmate');
+          this.is_run = false;
+        } else if (isStalemate(this.list, this.next)) {
+          gameEvent.emit('stalemate');
+          this.is_run = false;
+        } else if (isInCheck(this.list, this.next)) {
+          gameEvent.emit('check');
+        } else {
+          gameEvent.clear();
+        }
+
         return;
       }
 
       // 选中棋子
-      if (item !== NULL && this.active.length === 0 && this.next === item.type) {
+      if (
+        item !== NULL &&
+        this.active.length === 0 &&
+        this.next === item.type
+      ) {
         this.setActive(item);
       }
     },
