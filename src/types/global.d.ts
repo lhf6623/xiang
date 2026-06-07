@@ -53,7 +53,7 @@ declare global {
   type MapType = Array<PieceType | NullType>;
 
   type RunRule = {
-    [key in PieceCodeType]?: (map: MapType, piece: PieceType) => number[];
+    [key in PieceCodeType]: (map: MapType, piece: PieceType) => number[];
   };
   type RecordItem = {
     name: string;

@@ -15,6 +15,7 @@ import {
   isNULL,
   isBLACK,
   isRED,
+  isAcrossRiver,
 } from './data';
 // 找出这个棋子下一步的所有可能位置
 export const run_rule: RunRule = {
@@ -48,8 +49,8 @@ export const run_rule: RunRule = {
           result.push(index);
         } else if (!isNULL(map[index])) {
           obstacle += 1;
-          if (obstacle === 2 && map[index]?.type !== type) {
-            result.push(index);
+          if (obstacle === 2) {
+            if (map[index]?.type !== type) result.push(index);
             break;
           }
         }
@@ -88,7 +89,6 @@ export const run_rule: RunRule = {
   xiang(map, { type, index }) {
     const { x, y } = indexToXY(index);
     // 不能过河
-    const span = index < map.length / 2;
     return xiangRule.flatMap(([col, row], i) => {
       const _col = x + col;
       const _row = y + row;
@@ -98,8 +98,12 @@ export const run_rule: RunRule = {
       // 象脚
       const [bX, bY] = xiangJiaoRule[i];
       const bIndex = getIndex(y + bY, x + bX);
-      const _span = index < map.length / 2;
-      if (span === _span && isNULL(map[bIndex]) && isPass(map, index, type)) {
+
+      if (
+        isAcrossRiver(index, type) &&
+        isNULL(map[bIndex]) &&
+        isPass(map, index, type)
+      ) {
         return [index];
       }
       return [];
@@ -122,7 +126,6 @@ export const run_rule: RunRule = {
   bing(map, { type, index }) {
     const result: number[] = [];
     const { x, y } = indexToXY(index);
-    const MAP_LEN = map.length / 2;
 
     // 不能后退，过河之前不能左右移动
     for (const [col, row] of lineRule.values()) {
@@ -133,10 +136,7 @@ export const run_rule: RunRule = {
       // 小兵没过河之前不允许左右移动，不能后退，到底线时只能左右移动
       if (row === 0) {
         // 左右
-        if (
-          (isBLACK(type) && index > MAP_LEN) ||
-          (isRED(type) && index < MAP_LEN)
-        ) {
+        if (!isAcrossRiver(index, type)) {
           result.push(index);
         }
       } else {

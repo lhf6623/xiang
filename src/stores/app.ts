@@ -72,7 +72,6 @@ export const useAppStore = defineStore('app', {
       ];
       const idx = themes.indexOf(this.theme);
       this.theme = themes[(idx + 1) % themes.length];
-      document.documentElement.dataset.theme = this.theme;
     },
     /** 点击格子，选中 或者 移动棋子 */
     clickLattice(index: number, item: PieceType | null) {
@@ -101,21 +100,25 @@ export const useAppStore = defineStore('app', {
           return;
         }
 
-        const _mapList = this.list.map((v) => (v !== NULL ? { ...v } : NULL));
+        const historyList = this.list.map((v) =>
+          v !== NULL ? { ...v } : NULL
+        );
 
-        // 通过创建新数组引用触发 Vue 响应式更新
-        const list = [...this.list];
-        list[index] = { ..._piece, index };
-        list[pieceIndex] = NULL;
-        this.list = list;
+        this.list = this.list.map((v, i) => {
+          if (i === index) return { ..._piece, index };
+          if (i === pieceIndex) return NULL;
+          return v !== NULL ? { ...v } : NULL;
+        });
         this.lastMove = { from: pieceIndex, to: index };
         this.setActive(null);
 
         this.next = this.next === RED ? BLACK : RED;
 
         this.record.push({
-          name: makingChess(_mapList, pieceIndex, index),
-          list: this.list.flatMap((item) => (item === NULL ? [] : [item])),
+          name: makingChess(historyList, pieceIndex, index),
+          list: this.list.flatMap((item) =>
+            item === NULL ? [] : [{ ...item }]
+          ),
         });
         this.record_index = this.record.length - 1;
 
@@ -132,7 +135,7 @@ export const useAppStore = defineStore('app', {
         this.setActive(item);
       }
     },
-    // 检查将死
+    /** 检查将死, 发送消息 */
     check() {
       nextTick(() => {
         // 判断将军/将死/困毙
@@ -144,6 +147,8 @@ export const useAppStore = defineStore('app', {
           this.is_run = false;
         } else if (isInCheck(this.list, this.next)) {
           gameMsg.emit('check');
+        } else {
+          gameMsg.clearMsg();
         }
       });
     },

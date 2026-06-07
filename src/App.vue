@@ -12,7 +12,7 @@
   </div>
 </template>
 <script setup lang="ts">
-  import { onMounted } from 'vue';
+  import { onMounted, watchPostEffect } from 'vue';
   import Maps from '@/components/ChessMap.vue';
   import { Control } from '@/components/BoardParts';
   import RecordList from '@/components/RecordList.vue';
@@ -27,7 +27,9 @@
         e.preventDefault();
       }
     };
+  });
 
+  watchPostEffect(() => {
     // 初始化主题
     document.documentElement.dataset.theme = store.theme;
   });

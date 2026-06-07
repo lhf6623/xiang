@@ -90,7 +90,7 @@
       <div class="relative flex flex-wrap z-1">
         <ChessPiece
           v-for="(item, index) in store.list"
-          :key="index"
+          :key="`${item?.code}_${item?.type}_${index}`"
           @click="store.clickLattice(index, item)"
           :data="item"
           :active="tipsActive"

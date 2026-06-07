@@ -29,6 +29,10 @@ export function indexToXY(index: number): { x: number; y: number } {
     y: (index / COL) | 0,
   };
 }
+
+export function xyToIndex(x: number, y: number): number {
+  return y * COL + x;
+}
 /**
  * 在地图上
  */
@@ -47,6 +51,13 @@ export const isBLACK = (value: PieceColorType) => value === BLACK;
 
 export const isRED = (value: PieceColorType) => value === RED;
 
+/** 是否过河 */
+export const isAcrossRiver = (index: number, type: PieceColorType) => {
+  const isBlack = index < (COL * ROW) / 2;
+  if (isRED(type)) return !isBlack;
+  if (isBLACK(type)) return isBlack;
+  return false;
+};
 /**
  * 棋盘是一维数组，所以要用坐标还原索引
  * @param row y

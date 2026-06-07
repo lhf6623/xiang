@@ -91,16 +91,20 @@
     }
   });
   const list = computed(() => {
-    // 列表中的两个项为一项
-    return store.record.reduce((acc, cur, _index) => {
-      const last_arr = acc.at(-1);
-      if (Array.isArray(last_arr) && last_arr.length < 2) {
-        last_arr.push(cur);
-      } else {
-        acc.push([cur]);
+    let i = 0;
+    const res: RecordItem[][] = [];
+    const LEN = store.record.length;
+
+    while (i < LEN) {
+      const index = res.length;
+      res.push([store.record[index]]);
+      i++;
+      if (i + 1 < LEN) {
+        res.at(-1)?.push(store.record[index + 1]);
+        i++;
       }
-      return acc;
-    }, [] as RecordItem[][]);
+    }
+    return res;
   });
   // 开始
   const isStart = computed(() => store.record_index === -1);
