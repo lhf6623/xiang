@@ -96,13 +96,8 @@
     const LEN = store.record.length;
 
     while (i < LEN) {
-      const index = res.length;
-      res.push([store.record[index]]);
-      i++;
-      if (i + 1 < LEN) {
-        res.at(-1)?.push(store.record[index + 1]);
-        i++;
-      }
+      res.push([store.record[i++]]);
+      if (i < LEN) res.at(-1)?.push(store.record[i++]);
     }
     return res;
   });
