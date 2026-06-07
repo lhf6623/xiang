@@ -7,7 +7,7 @@ import { NULL, RED, BLACK, piece_list } from '@/utils/data';
 import { makingChess, initMap } from '@/utils';
 import { run_rule } from '@/utils/run-rule';
 import { isMoveSafe, isInCheck, isCheckmate, isStalemate } from '@/utils/check';
-import { gameEvent } from '@/utils/eventBus';
+import { gameMsg } from '@/utils/game-msg';
 import { version_key } from '@/utils';
 
 export const store = createPinia();
@@ -36,13 +36,13 @@ export const useAppStore = defineStore('app', {
       this.record_index = -1;
       this.deduction_list = [];
       this.lastMove = null;
-      gameEvent.clear();
+      gameMsg.clearMsg();
     },
     /** 读取记录 */
     readRecord(index: number, list?: PieceType[]) {
       this.active = [];
       this.lastMove = null;
-      gameEvent.clear();
+      gameMsg.clearMsg();
       this.record_index = index;
       const pieceList = index < 0 ? piece_list : this.record[index].list;
 
@@ -93,7 +93,7 @@ export const useAppStore = defineStore('app', {
 
         // 走后是否会导致己方被将军
         if (!isMoveSafe(this.list, pieceIndex, index, _piece.type)) {
-          gameEvent.emit('illegal-move');
+          gameMsg.emit('illegal-move');
           return;
         }
 
@@ -117,15 +117,13 @@ export const useAppStore = defineStore('app', {
 
         // 判断将军/将死/困毙
         if (isCheckmate(this.list, this.next)) {
-          gameEvent.emit('checkmate');
+          gameMsg.emit('checkmate');
           this.is_run = false;
         } else if (isStalemate(this.list, this.next)) {
-          gameEvent.emit('stalemate');
+          gameMsg.emit('stalemate');
           this.is_run = false;
         } else if (isInCheck(this.list, this.next)) {
-          gameEvent.emit('check');
-        } else {
-          gameEvent.clear();
+          gameMsg.emit('check');
         }
 
         return;

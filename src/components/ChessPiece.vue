@@ -57,7 +57,9 @@
 
   const activeColorClass = computed(() => {
     const isRed = props.active.findIndex((item) => item === props.index) === 0;
-    return isRed ? 'border-chess-piece-side-red-active' : 'border-chess-piece-side-black-active';
+    return isRed
+      ? 'border-chess-piece-side-red-active'
+      : 'border-chess-piece-side-black-active';
   });
 
   const showActive = computed(() => {

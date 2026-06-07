@@ -13,7 +13,8 @@
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{ts,tsx,vue,css}\"",
     "lint": "eslint \"src/**/*.{ts,tsx,vue}\"",
-    "check": "pnpm lint && pnpm format",
+    "typecheck": "vue-tsc --noEmit",
+    "check": "pnpm typecheck && pnpm lint && pnpm format",
     "sync-version": "node scripts/sync-version.mjs",
     "prepare": "husky"
   },

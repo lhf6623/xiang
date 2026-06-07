@@ -95,7 +95,7 @@
           :data="item"
           :active="tipsActive"
           :index="index"
-          :isLastMoved="store.lastMove?.to === index"
+          :is-last-moved="store.lastMove?.to === index"
         />
       </div>
       <!-- 原位标记：棋子移动前的位置（实心圆点，呼吸） -->
