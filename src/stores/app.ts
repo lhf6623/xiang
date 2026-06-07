@@ -1,6 +1,5 @@
-import { createPinia } from 'pinia';
+import { createPinia, defineStore } from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
-import { defineStore } from 'pinia';
 
 import { NULL, RED, BLACK, piece_list } from '@/utils/data';
 
@@ -9,6 +8,7 @@ import { run_rule } from '@/utils/run-rule';
 import { isMoveSafe, isInCheck, isCheckmate, isStalemate } from '@/utils/check';
 import { gameMsg } from '@/utils/game-msg';
 import { version_key } from '@/utils';
+import { nextTick } from 'vue';
 
 export const store = createPinia();
 store.use(piniaPluginPersistedstate);
@@ -49,6 +49,10 @@ export const useAppStore = defineStore('app', {
       this.list = initMap(list ?? pieceList);
 
       this.is_run = index === this.record.length - 1;
+
+      if (this.record.length - 1 === index) {
+        this.check();
+      }
     },
     /** 棋盘格子的活动状态 */
     setActive(piece: PieceType | null | undefined) {
@@ -115,17 +119,7 @@ export const useAppStore = defineStore('app', {
         });
         this.record_index = this.record.length - 1;
 
-        // 判断将军/将死/困毙
-        if (isCheckmate(this.list, this.next)) {
-          gameMsg.emit('checkmate');
-          this.is_run = false;
-        } else if (isStalemate(this.list, this.next)) {
-          gameMsg.emit('stalemate');
-          this.is_run = false;
-        } else if (isInCheck(this.list, this.next)) {
-          gameMsg.emit('check');
-        }
-
+        this.check();
         return;
       }
 
@@ -137,6 +131,21 @@ export const useAppStore = defineStore('app', {
       ) {
         this.setActive(item);
       }
+    },
+    // 检查将死
+    check() {
+      nextTick(() => {
+        // 判断将军/将死/困毙
+        if (isCheckmate(this.list, this.next)) {
+          gameMsg.emit('checkmate');
+          this.is_run = false;
+        } else if (isStalemate(this.list, this.next)) {
+          gameMsg.emit('stalemate');
+          this.is_run = false;
+        } else if (isInCheck(this.list, this.next)) {
+          gameMsg.emit('check');
+        }
+      });
     },
   },
   persist: {

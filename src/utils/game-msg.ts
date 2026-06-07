@@ -27,7 +27,7 @@ export const EVENT_MESSAGE: Record<gameMsgType, gameItemMsgType> = {
 
 type Handler = (item: gameItemMsgType) => void;
 
-/** 游戏事件总线 —— 每次 emit 独立送达；同时更新 eventMessage 供组件响应式读取 */
+/** 游戏消息发送到界面显示 */
 class GameMsg {
   private listeners = new Set<Handler>();
 
@@ -39,7 +39,7 @@ class GameMsg {
     });
   }
 
-  /** 订阅某类事件，返回取消订阅函数 */
+  /** 订阅事件 */
   on(fn: Handler): () => void {
     this.listeners.add(fn);
 

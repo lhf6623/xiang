@@ -83,10 +83,12 @@
     // 用户手动滚动离开底部后，不再自动滚动
     if (userAction.value) return;
 
-    scrollRef.value?.scrollTo({
-      top: height.value,
-      behavior: 'smooth',
-    });
+    if (height.value) {
+      scrollRef.value?.scrollTo({
+        top: scrollRef.value.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
   });
   const list = computed(() => {
     // 列表中的两个项为一项
