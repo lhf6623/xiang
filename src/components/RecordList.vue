@@ -18,7 +18,7 @@
         </li>
         <li
           v-for="([item1, item2], index) in list"
-          class="relative flex-center gap-2 b-b"
+          class="relative flex-center gap-2 b-b last:b-b-none"
           :key="index"
         >
           <span @click="readRecord(index, 0)" class="w-58% text-left pl-2">
@@ -46,7 +46,7 @@
 
 <script lang="ts" setup>
   import { useElementSize } from '@/composables/useElementSize';
-  import { computed, useTemplateRef, watch } from 'vue';
+  import { computed, ref, useTemplateRef, watchPostEffect } from 'vue';
   import { useAppStore } from '@/stores/app';
 
   const recordListRef = useTemplateRef<HTMLElement | null>('recordRef');
@@ -54,17 +54,40 @@
 
   const store = useAppStore();
 
+  // 用户自己动过滚动条（离开底部即为 true，回到底部自动恢复 false）
+  const userAction = ref(false);
+
+  // 判断是否接近底部（阈值 50px 内算在底部）
+  function isNearBottom(el: HTMLElement): boolean {
+    const { scrollTop, scrollHeight, clientHeight } = el;
+    return scrollHeight - scrollTop - clientHeight < 50;
+  }
+
+  function onScroll() {
+    const el = scrollRef.value;
+    if (!el) return;
+    userAction.value = !isNearBottom(el);
+  }
+
+  watchPostEffect((onCleanup) => {
+    scrollRef.value?.addEventListener('scroll', onScroll);
+
+    onCleanup(() => {
+      scrollRef.value?.removeEventListener('scroll', onScroll);
+    });
+  });
+
   const { height } = useElementSize(recordListRef);
-  watch(
-    () => height,
-    () => {
-      scrollRef.value?.scrollBy({
-        top: height.value,
-        behavior: 'smooth',
-      });
-    },
-    { deep: true }
-  );
+
+  watchPostEffect(() => {
+    // 用户手动滚动离开底部后，不再自动滚动
+    if (userAction.value) return;
+
+    scrollRef.value?.scrollTo({
+      top: height.value,
+      behavior: 'smooth',
+    });
+  });
   const list = computed(() => {
     // 列表中的两个项为一项
     return store.record.reduce((acc, cur, _index) => {
